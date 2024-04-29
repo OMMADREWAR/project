@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+     $(document).ready(function(){
+        let fetchData=()=>{
+            let httprequest=new XMLHttpRequest();
+            httprequest.open("GET","https://randomuser.me/api/?results=10&nat=in,us,au")
+            httprequest.send();
+            httprequest.onload=()=>{
+                let res=JSON.parse(httprequest.responseText).results;
+                localStorage.setItem("users",JSON.stringify(res));
+                displayData();
+            }
+        }
+        
+
+        let displayData=()=>{
+            let tbody=document.getElementById("tbody");
+            tbody.innerHTML="";
+            let storedUser=JSON.parse(localStorage.getItem("users"));
+            storedUser.map((user,index)=>(
+                tbody.innerHTML += `
+                <tr>
+                <td>${index+1}</td>
+                <td>${user.name.first} ${user.name.last}</td>
+                <td>${user.login.username}</td>
+                <td>${user.dob.age}</td>
+                <td>${user.email}</td>
+                <td>${user.phone}</td>
+                <td>${user.location.city}</td>
+                <td>${user.location.country}</td>
+                </tr>`
+            ));
+        };
+
+        fetchData();
+
+        $("#registrationform").submit(function(event){
+            event.preventDefault();
+            const name=$("#name").val();
+            const username=$("#username").val();
+            const age=$("#age").val();
+            const email=$("#email").val();
+            const password=$("#password").val();
+            const phone=$("#phone").val();
+            const city=$("#city").val();
+            const country=$("#country").val();
+
+            if(name && username && age && email && password && phone && city && country){
+                let postObject ={
+                    name:{first:name,last:""},
+                    login:{username:username},
+                    dob :{age:age},
+                    email:email,
+                    phone:phone,
+                    location:{city:city,country:country}
+                };
+
+                let storedUser=JSON.parse(localStorage.getItem("users"));
+                storedUser.unshift(postObject);
+                localStorage.setItem("users",JSON.stringify(storedUser));
+                displayData();
+            }else{
+                alert("please fill in all the required fields");
+            }
+
+        });
+     });   
+    </script>
+</body>
+</html>

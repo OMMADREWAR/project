@@ -1,0 +1,39 @@
+{
+  "user": [
+    {
+      "name": "John",
+      "email": "John@gmail.com",
+      "id": 1
+    },
+    {
+      "name": "venkatesh",
+      "email": "venky@gmail.com",
+      "id": 2
+    },
+    {
+      "name": "Mahesh",
+      "email": "Mahesh@gmail.com",
+      "id": 3
+    },
+    {
+      "name": "Nandini",
+      "email": "Nandini@gmail.com",
+      "id": 4
+    },
+    {
+      "name": "om",
+      "email": "om@gmail.com",
+      "id": 5
+    },
+    {
+      "name": "pranav",
+      "email": "pranav123@gmail.com",
+      "id": 7
+    },
+    {
+      "name": "Disha",
+      "email": "Disha@gmail.com",
+      "id": 8
+    }
+  ]
+}
